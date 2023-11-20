@@ -309,4 +309,4 @@ def round2(player_score):
     pygame.quit()
 
 
-round2(10000)
+# round2(10000)
