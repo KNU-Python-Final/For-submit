@@ -326,4 +326,4 @@ def round2(player_score):
     pygame.quit()
 
 
-round2(10000) #테스트용..
+# round2(10000) #테스트용..

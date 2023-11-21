@@ -145,4 +145,4 @@ def round3(score):
         pygame.display.update()
 
     pygame.quit()
-round3(100000)
+# round3(100000)

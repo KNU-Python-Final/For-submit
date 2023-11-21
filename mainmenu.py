@@ -31,8 +31,10 @@ easter_egg1=[0,0,0,0,0,0] #1번 이스터 조건
 easter = 0 # 1번 이스터 상자를 떨궜는지
 easter_now = [0,0] #이스터 에그 발견 현황 -> 1번 이스터 상자 열기까지 했는지
 global score # score 공유 -> 이스터 에그 때문
-score = 0
+global is_earned
+is_earned = False
 
+score = 0
 score, selected_image = resources.save_files.load()
 
 # 사운드 가져오기
@@ -101,7 +103,11 @@ def chain_letters(easter_now,sound): #이스터 에그 보물상자 열 경우 �
                                'red')
     screen.blit(chain_letter, (300, 450))
     global score
-    score = 100000
+    global is_earned
+    if not is_earned:
+        score += 100000
+        resources.save_files.save(score, selected_image)  # 게임 종료 시 점수 저장
+        is_earned = True
 
 def quitgame():
     pygame.quit()
@@ -193,7 +199,6 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
                             box_drop.play(0)
                         easter = True
                         screen.blit(closed_treasure_box,(WIDTH//2 - 75 ,350))
-                        resources.save_files.save(score + 1000000, selected_image)  # 게임 종료 시 점수 저장
                         pygame.display.flip()
 
 
