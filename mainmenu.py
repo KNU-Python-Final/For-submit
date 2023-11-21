@@ -13,6 +13,7 @@ import time
 import sys
 import pacman_2
 import option
+import resources.save_files
 
 sound = 1
 
@@ -32,7 +33,7 @@ easter_now = [0,0] #이스터 에그 발견 현황 -> 1번 이스터 상자 열�
 global score # score 공유 -> 이스터 에그 때문
 score = 0
 
-
+score, selected_image = resources.save_files.load()
 
 # 사운드 가져오기
 click_easter = pygame.mixer.Sound("assets/sounds/click_easter.wav")
@@ -92,7 +93,7 @@ def chain_letters(easter_now,sound): #이스터 에그 보물상자 열 경우 �
     if easter_now[0] == 0 and sound == 1:
         open_the_box.play(0)
     easter_now[0] = 1
-    font = pygame.font.Font("assets/pacman_main_menu_images/NPSfont_regular.ttf", 30)
+    font = pygame.font.Font("assets/pacman_main_menu_images/NPSfont_regular.ttf", 26)
     chain_letter = font.render(f'강남대 구모씨가 숨긴 이스터에그를 발견하셨습니다! 남은 이스터에그 :  {easter_now.count(1)}개', True,
                             'green')
     screen.blit(chain_letter, (50, 400))
@@ -109,9 +110,6 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
     screen.fill('black')  # 스크린 색
     pacman_logo = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/pacman_logo.png'), (600, 300))
     image = []
-
-
-
 
     #사운드 가져오기
     #bgm = pygame.mixer.Sound("assets/sounds/pacman_beginning.wav")
@@ -195,6 +193,7 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
                             box_drop.play(0)
                         easter = True
                         screen.blit(closed_treasure_box,(WIDTH//2 - 75 ,350))
+                        resources.save_files.save(score + 1000000, selected_image)  # 게임 종료 시 점수 저장
                         pygame.display.flip()
 
 
@@ -207,7 +206,7 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
         font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 30)
         screen.blit(name_text, (150, 0))
 
-
+        resources.save_files.save(score, selected_image)  # 게임 종료 시 점수 저장
         startButton = Button(start_img, click_start_img, WIDTH // 2-208//2, 450+100, 208,50, sound, score, pacman_2.pacman,main_menu)
         opionButton = Button(options_img, click_options_img, WIDTH // 2 - 225 // 2, 450+200, 230, 65,sound,[easter,easter_now], action = option.options,func = main_menu)
         exitbutton = Button(exit_img, click_exit_img, WIDTH // 2 - 160 // 2, 450+330, 160, 52, sound,None, quitgame,func = main_menu)
