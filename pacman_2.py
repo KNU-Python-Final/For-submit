@@ -37,9 +37,11 @@ def pacman(score):
     import mainmenu
     import time
     import round2_1
+    import resources.save_files
+    import resources.images.characters
     from option import maze_index
     from option import sound #sound 설정에서 받고 들리게 설정했으면(1) -> 소리 들리게 if문 처리...
-
+    score, selected_image = resources.save_files.load()
     if maze_index == 0:
         color = 'green'
     elif maze_index == 1:
@@ -60,9 +62,10 @@ def pacman(score):
     #color = 'green'#벽 색깔 걍 변수로 미리 해둠(0,255,0)(46,135,255)(251,171,197)(255,222,10)
     PI = math.pi #pi 상수
     player_images = [] #빈리스트 미리 만들기
-    for i in range(1, 5):
-        player_images.append(pygame.transform.scale(pygame.image.load(f'assets/player_images/{i}.png'), (45, 45))) #이미지 1~4를 가져와서 크기는 바꾸는거임 ->45,45로  -> 그리고 리스트에 추가
-
+    # for i in range(1, 5):
+        # player_images.append(pygame.transform.scale(pygame.image.load(f'assets/player_images/{i}.png'), (45, 45))) #이미지 1~4를 가져와서 크기는 바꾸는거임 ->45,45로  -> 그리고 리스트에 추가
+    for image_path in resources.images.characters.get_images_path(selected_image):
+        player_images.append(pygame.transform.scale(pygame.image.load(image_path), (50, 50)))
     # 사운드 가져오기
     powerup_sound = pygame.mixer.Sound("assets/sounds/ghost_time.mp3")
     bgm = pygame.mixer.Sound("assets/sounds/bgm.mp3")
@@ -1463,3 +1466,5 @@ def pacman(score):
 
         pygame.display.flip() #화면 전체 업데이트
     pygame.quit() #종료~
+
+# pacman(10000)
