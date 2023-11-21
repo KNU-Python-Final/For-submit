@@ -3,14 +3,20 @@ import random
 import time
 from datetime import datetime
 import round3
-
+import resources.save_files
+import resources.images.characters
 
 def round2(player_score):
     # 1. 게임 초기화
     pygame.init()
+    
+    player_score, selected_image = resources.save_files.load()
+
     coin_list = []
     last_bullet_time = 0
     bullet_cooldown = 500  # 500ms = 0.5초
+
+    startup_counter = 0 #3초 후 시작하려고
 
     # 2. 게임창 옵션 설정
     size = [900, 950]
@@ -47,16 +53,6 @@ def round2(player_score):
     .sx = 가로 크기,.sy = 세로 크기
     '''
 
-    # 점수 저장 함수
-    def save_score(score):
-        with open("score.txt", "w") as f:  # score.txt 파일을 쓰기모드("w")로 열기, with 구문을 사용하여 작업 후 파일 닫기
-            f.write(str(score))  # score를 문자열로 파일에 기록
-
-    # 점수 불러오기 함수
-    '''
-    try - except를 이용하여 예외(파일이 존재하지 않은 경우)를 처리
-    '''
-
     # 히트박스
     def circle_crash(obj1, obj2):
         center1 = (obj1.x + obj1.sx / 2, obj1.y + obj1.sy / 2)
@@ -72,10 +68,10 @@ def round2(player_score):
     ss = obj()
 
     pacman_images = []
-    for i in range(1, 5):
-        pacman_images.append(pygame.transform.scale(pygame.image.load(f'assets/player_images/{i}.png'), (50, 50)))
+    for image_path in resources.images.characters.get_images_path(selected_image):
+        pacman_images.append(pygame.transform.scale(pygame.image.load(image_path), (50, 50)))
 
-    ss.put_image("assets/player_images/1.png")  # 시작 이미지 설정
+    ss.put_image(resources.images.characters.default_1_path)  # 시작 이미지 설정
     ss.change_size(50, 50)  # 이미지 크기 조정
 
     ss.x = round(size[0] / 2 - ss.sx / 2)
@@ -101,15 +97,24 @@ def round2(player_score):
     is_stopped = False  # Start/Stop Boolean
     while not is_stopped:
         clock.tick(60)
-        for event in pygame.event.get():
+        '''for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     is_stopped = True
         screen.fill(black)
         font = pygame.font.Font("assets/2round_images/SOYO.ttf", 20)
         text = font.render("PRESS SPACE KEY TO START THE GAME", True, (255, 255, 255))
-        screen.blit(text, (245, round(size[1] / 2 - 50)))
-        pygame.display.flip()
+        screen.blit(text, (245, round(size[1] / 2 - 50)))'''
+        if startup_counter<180:
+            font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 50)
+            screen.fill('black')
+            ready_text = font.render(f'GET READY {3-startup_counter//60}', True, 'yellow')  # antialias : True -> 선 부드럽게..
+            screen.blit(ready_text, (190, 450))
+            startup_counter += 1
+            pygame.display.flip()
+        else:
+            is_stopped = True
+
 
     # 4. 메인 이벤트
     start_time = datetime.now()
@@ -288,25 +293,37 @@ def round2(player_score):
         screen.blit(text_time, (size[0] - 100, 5))
 
         text_score = font.render("score : {}".format(player_score), True, (255, 255, 255))
-        screen.blit(text_score, (size[0] - 230, 5))
+        screen.blit(text_score, (size[0] - 250, 5))
 
         # 4-5. 업데이트
         pygame.display.flip()
 
+    end_counter = 0 #종료 화면 후 round3 넘어가는 시간
     # 5. 게임 종료
     while is_gameovered:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                save_score(player_score)  # 게임 종료 시 점수 저장
+                resources.save_files.save(player_score, selected_image)  # 게임 종료 시 점수 저장
                 is_gameovered = 0
-        font = pygame.font.Font("assets/2round_images/SOYO.ttf", 40)
-        text = font.render("GAME OVER", True, (255, 0, 0))
-        screen.blit(text, (320, round(size[1] / 2 - 50)))
-        time.sleep(3)
-        round3.round3(player_score)
-        pygame.display.flip()
+        font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 35)
+        text = font.render(f"Final Score : {player_score}", True, 'white')
+        screen.blit(text, (100, round(size[1] / 2 - 130)))
+        text = font.render(f"SCORE -> COIN", True, 'yellow')
+        screen.blit(text, (160, round(size[1] / 2 - 30)))
+        text = font.render(f"Final Coin  : {player_score}", True, 'white')
+        screen.blit(text, (100, round(size[1] / 2 + 70)))
+        if end_counter < 60*8:
+            font = pygame.font.Font("assets/pacman_main_menu_images/neodgm.ttf", 25)
+            pygame.draw.rect(screen, 'black', [540,round(size[1] / 2 + 200) , 25, 25], 13)
+            text = font.render(f"상점까지 남은 시간 앞으로 {7-end_counter//60}초..", True, 'white') #7~0까지 나오게
+            screen.blit(text, (220, round(size[1] / 2 + 200)))
+            end_counter += 1
+            pygame.display.flip()
+        else:
+            round3.round3(player_score)
+            pygame.display.flip()
     pygame.quit()
 
 
-# round2(10000)
+round2(10000) #테스트용..

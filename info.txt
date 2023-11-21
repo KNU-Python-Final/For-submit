@@ -1,1 +1,1 @@
-Score: 10000, Image: heartking_image.png
+Score: 40160, Image: heart_angel

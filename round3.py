@@ -1,25 +1,12 @@
 import pygame
 import time
+import resources.images.characters
+import resources.save_files
 
 def round3(score):
     pygame.init()
 
-    def save_info(score, image_file):
-        with open("info.txt", "w") as file: # info.txt 파일을 "w"(쓰기모드)로 열기
-            file.write(f"Score: {score}, Image: {image_file}") # 문자열을 file에 쓰기
-
-    def load_info():
-        try: # 이미지가 없을 때 (예외의 상황) 를 위한 코드
-            with open("info.txt", "r") as file: # info.txt 파일을 "r"(읽기모드)로 열기
-                data = file.read() # 파일의 내용을 문자열로 읽어 변수에 지정
-                score_part, image_part = data.split(", ") # ", " 를 기준으로 데이터 나누기
-                score = int(score_part.split(": ")[1]) # 두번째 요소를 정수로 반환하여 변수에 지정
-                image_file = image_part.split(": ")[1] # 두번째 요소를 반환하여 변수에 지정
-                return score, image_file # score, image_flie 반환
-        except FileNotFoundError: # 예외 상황시
-            return 0, '2R/images/1.png' # score = 0, image_file = 기본 이미지 로 변경
-
-    player_score, selected_image_file = load_info()
+    player_score, selected_image = resources.save_files.load()
 
     # 초기 설정 및 이미지 로드
     WIDTH, HEIGHT = 900, 950
@@ -33,33 +20,24 @@ def round3(score):
     button_colors = [(255, 165, 0), (0, 191, 255), (255, 69, 0), (138, 43, 226), (128, 128, 128)] # 버튼의 색상(RGB) 지정
 
     # 이미지 경로 지정
-    king_image_path = 'kingPacman.png'
-    angel_image_path = 'angelPacman.png'
-    leaf_image_path = 'leafPacman.png'
-    heartking_image_path = 'heartking_image.png'
-    heartangel_image_path = 'heartangel_image.png'
-    heartleaf_image_path = 'heartleaf_image.png'
+    
     exit_image_path = 'exit.png'
     background_image_path = 'bg.png'
 
-    # 이미지 크기 조정
-    king_image = pygame.transform.scale(pygame.image.load(king_image_path), (300, 300))
-    angel_image = pygame.transform.scale(pygame.image.load(angel_image_path), (300, 300))
-    leaf_image = pygame.transform.scale(pygame.image.load(leaf_image_path), (300, 300))
-    heartking_image = pygame.transform.scale(pygame.image.load(heartking_image_path), (300, 300))
-    heartangel_image = pygame.transform.scale(pygame.image.load(heartangel_image_path), (300, 300))
-    heartleaf_image = pygame.transform.scale(pygame.image.load(heartleaf_image_path), (300, 300))
     exit_img = pygame.transform.scale(pygame.image.load(exit_image_path), (40, 40))
     background_image = pygame.image.load(background_image_path)
 
+    def get_image(name):
+            return pygame.transform.scale(pygame.image.load(resources.images.characters.get_image_path(selected_image)), (300, 300))
+
     prices = {
-        'king': 100000,
-        'angel': 60000,
-        'leaf': 80000,
-        'santa': 0
+        resources.images.characters.king_str : 100000,
+        resources.images.characters.angel_str: 60000,
+        resources.images.characters.leaf_str: 80000,
+        resources.images.characters.king_str: 0
     }
     selected_price = None
-    selected_image = None
+    selected_image = ''
     buy_button = None
     insufficient_score_message = False
     message_start_time = 0
@@ -81,26 +59,22 @@ def round3(score):
             if event.type == pygame.MOUSEBUTTONDOWN: # 마우스 버튼을 클릭했을 때
                 mouse_pos = event.pos # 클릭한 위치를 변수에 지정
                 if button_king.collidepoint(mouse_pos): # button_king의 좌표 안에서 마우스 클릭 했다면
-                    selected_image = king_image # 이미지 업데이트
-                    selected_image_file = king_image_path  # 이미지 파일 경로 업데이트
-                    selected_price = prices['king']
+                    selected_image = resources.images.characters.king_str # 이미지 업데이트
+                    selected_price = prices[resources.images.characters.king_str]
                 elif button_angel.collidepoint(mouse_pos):
-                    selected_image = angel_image 
-                    selected_image_file = angel_image_path
-                    selected_price = prices['angel']
+                    selected_image = resources.images.characters.angel_str
+                    selected_price = prices[resources.images.characters.angel_str]
                 elif button_leaf.collidepoint(mouse_pos):
-                    selected_image = leaf_image
-                    selected_image_file = leaf_image_path
-                    selected_price = prices['leaf']
+                    selected_image = resources.images.characters.leaf_str
+                    selected_price = prices[resources.images.characters.leaf_str]
                 elif button_Santa.collidepoint(mouse_pos):
-                    selected_image = king_image
-                    selected_image_file = king_image_path  # 예시로 동일한 이미지 경로 사용
-                    selected_price = prices['santa']
+                    selected_image = resources.images.characters.king_str
+                    selected_price = prices[resources.images.characters.king_str]
                 
                 if buy_button and buy_button.collidepoint(mouse_pos):
                     if player_score >= selected_price:
                         player_score -= selected_price
-                        save_info(player_score, selected_image_file)
+                        resources.save_files.save(player_score, selected_image)
                     # elif player_score < selected_price:
                     #     print("점수가 부족합니다")
                     else:
@@ -108,32 +82,26 @@ def round3(score):
                         message_start_time = time.time()
 
                 elif button_heart_version.collidepoint(mouse_pos):
-                    if selected_image == king_image:
-                        selected_image = heartking_image
-                        selected_image_file = heartking_image_path  # 경로 업데이트
-                    elif selected_image == heartking_image:
-                        selected_image = king_image
-                        selected_image_file = king_image_path  # 경로 업데이트
-                    if selected_image == angel_image:
-                        selected_image = heartangel_image
-                        selected_image_file = heartangel_image_path  # 경로 업데이트
-                    elif selected_image == heartangel_image:
-                        selected_image = angel_image
-                        selected_image_file = angel_image_path  # 경로 업데이트
-                    if selected_image == leaf_image:
-                        selected_image = heartleaf_image
-                        selected_image_file = heartleaf_image_path  # 경로 업데이트
-                    elif selected_image == heartleaf_image:
-                        selected_image = leaf_image
-                        selected_image_file = leaf_image_path  # 경로 업데이트
+                    if selected_image == 'king':
+                        selected_image = 'heart_king'
+                    elif selected_image == 'heart_king':
+                        selected_image = 'king'
+                    if selected_image == 'angel':
+                        selected_image = 'heart_angel'
+                    elif selected_image == 'heart_angel':
+                        selected_image = 'angel'
+                    if selected_image == 'leaf':
+                        selected_image = 'heart_leaf'
+                    elif selected_image == 'heart_leaf':
+                        selected_image = 'leaf'
 
                 elif restart_button.collidepoint(mouse_pos):
                     run = False
                 elif exit_button.collidepoint(mouse_pos):
                     run = False
 
-        if selected_image: # 이미지가 할당 되었는지 확인
-            screen.blit(selected_image, (500, 300)) # 500, 300에 지정된 이미지 그리기
+        if not selected_image == '': # 이미지가 할당 되었는지 확인 (비어있지 않다면)
+            screen.blit(get_image(selected_image), (500, 300)) # 500, 300에 지정된 이미지 그리기
             buy_button = pygame.draw.rect(screen, button_colors[4], (520, 675, 250, 50)) # (520, 675)에 250x50 크기의 버튼 생성
             buy_text = button_font.render('BUY', True, (255, 255, 255)) # 텍스트 생성
             # buy_button 중앙에 buy_text 배치
@@ -177,3 +145,4 @@ def round3(score):
         pygame.display.update()
 
     pygame.quit()
+round3(100000)
