@@ -14,6 +14,7 @@ def round3(score):
     pygame.display.set_caption("3round") # 제목 설정
 
     font = pygame.font.SysFont('arial', 24)
+    price_font = pygame.font.SysFont('arial', 30)
     shop_font = pygame.font.SysFont('arial', 40)
     button_font = pygame.font.SysFont('arial', 40)
 
@@ -21,8 +22,8 @@ def round3(score):
 
     # 이미지 경로 지정
     
-    exit_image_path = 'exit.png'
-    background_image_path = 'bg.png'
+    exit_image_path = './assets/3round_images/etc/exit.png'
+    background_image_path = './assets/3round_images/etc/bg.png'
 
     exit_img = pygame.transform.scale(pygame.image.load(exit_image_path), (40, 40))
     background_image = pygame.image.load(background_image_path)
@@ -34,7 +35,7 @@ def round3(score):
         resources.images.characters.king_str : 100000,
         resources.images.characters.angel_str: 60000,
         resources.images.characters.leaf_str: 80000,
-        resources.images.characters.king_str: 0
+        resources.images.characters.santa_str: 90000
     }
     selected_price = None
     selected_image = ''
@@ -51,7 +52,7 @@ def round3(score):
         button_king = pygame.draw.rect(screen, button_colors[0], (70, 215, 300, 70)) # x좌표, y좌표, 너비, 높이
         button_angel = pygame.draw.rect(screen, button_colors[1], (70, 475, 300, 70))
         button_leaf = pygame.draw.rect(screen, button_colors[2], (70, 345, 300, 70))
-        button_Santa = pygame.draw.rect(screen, button_colors[3], (70, 605, 300, 70))
+        button_santa = pygame.draw.rect(screen, button_colors[3], (70, 605, 300, 70))
 
         for event in pygame.event.get(): # 이벤트 순회
             if event.type == pygame.QUIT:
@@ -67,9 +68,9 @@ def round3(score):
                 elif button_leaf.collidepoint(mouse_pos):
                     selected_image = resources.images.characters.leaf_str
                     selected_price = prices[resources.images.characters.leaf_str]
-                elif button_Santa.collidepoint(mouse_pos):
-                    selected_image = resources.images.characters.king_str
-                    selected_price = prices[resources.images.characters.king_str]
+                elif button_santa.collidepoint(mouse_pos):
+                    selected_image = resources.images.characters.santa_str
+                    selected_price = prices[resources.images.characters.santa_str]
                 
                 if buy_button and buy_button.collidepoint(mouse_pos):
                     if player_score >= selected_price:
@@ -94,6 +95,10 @@ def round3(score):
                         selected_image = 'heart_leaf'
                     elif selected_image == 'heart_leaf':
                         selected_image = 'leaf'
+                    if selected_image == 'santa':
+                        selected_image = 'heart_santa'
+                    elif selected_image == 'heart_santa':
+                        selected_image = 'santa'
 
                 elif restart_button.collidepoint(mouse_pos):
                     run = False
@@ -107,7 +112,7 @@ def round3(score):
             # buy_button 중앙에 buy_text 배치
             screen.blit(buy_text, (buy_button.x + (buy_button.width - buy_text.get_width()) // 2, buy_button.y + (buy_button.height - buy_text.get_height()) // 2))
             if selected_price is not None:
-                price_text = font.render(f'{selected_price}', True, (255, 255, 255))
+                price_text = price_font.render(f'{selected_price}', True, (255, 255, 255))
                 screen.blit(price_text, (520, 640))  # 가격 텍스트 위치 조정 필요
         score_text = font.render(f'Score: {player_score}', True, (255, 255, 255)) # 텍스트 렌더링
         screen.blit(score_text, (10, 10)) # 렌더링된 텍스트를 화면에 표시
@@ -115,9 +120,9 @@ def round3(score):
         king_text = font.render('King', True, (0, 0, 0)) # king_text 렌더링
         angel_text = font.render('Angel', True, (0, 0, 0)) # angel_text 렌더링
         leaf_text = font.render('Leaf', True, (0, 0, 0)) # leaf_text 렌더링
-        Santa_text = font.render('Santa', True, (0, 0, 0)) # Santo_text 렌더링
+        santa_text = font.render('Santa', True, (0, 0, 0)) # Santo_text 렌더링
 
-        button_texts = [king_text, angel_text, leaf_text, Santa_text]
+        button_texts = [king_text, angel_text, leaf_text, santa_text]
         button_positions = [(70, 215), (70, 475), (70, 345), (70, 605)] # 버튼의 위치 지정
         # button_texts, button_position을 결합하여 새로운 튜플 생성 >> text 와 text의 좌표를 생성
         for text, (x, y) in zip(button_texts, button_positions):
@@ -145,4 +150,4 @@ def round3(score):
         pygame.display.update()
 
     pygame.quit()
-# round3(100000)
+round3(100000)

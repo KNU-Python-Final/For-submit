@@ -1,1 +1,1 @@
-Score: 4620, Image: king
+Score: 10000, Image: santa

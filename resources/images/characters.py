@@ -81,6 +81,33 @@ heart_leafs_path = [
 ]
 
 
+santa_str = 'santa'
+
+santa_1_path = './assets/3round_images/santa/1.png'
+santa_2_path = './assets/3round_images/santa/2.png'
+santa_3_path = './assets/3round_images/santa/3.png'
+santa_4_path = './assets/3round_images/santa/4.png'
+santas_path = [
+    santa_1_path,
+    santa_2_path,
+    santa_3_path,
+    santa_4_path,
+]
+
+
+heart_santa_str = 'heart_santa'
+
+heart_santa_1_path = './assets/3round_images/heart_santa/1.png'
+heart_santa_2_path = './assets/3round_images/heart_santa/2.png'
+heart_santa_3_path = './assets/3round_images/heart_santa/3.png'
+heart_santa_4_path = './assets/3round_images/heart_santa/4.png'
+heart_santas_path = [
+    heart_santa_1_path,
+    heart_santa_2_path,
+    heart_santa_3_path,
+    heart_santa_4_path,
+]
+
 default_str = 'default'
 
 default_1_path = './assets/3round_images/default/1.png'
@@ -109,6 +136,10 @@ def get_image_path(name: str) -> str:
         return angel_1_path
     elif name == heart_angel_str:
         return heart_angel_1_path
+    elif name == santa_str:
+        return santa_1_path
+    elif name == heart_santa_str:
+        return heart_santa_1_path
     else:
         return '' # error
 
@@ -127,5 +158,9 @@ def get_images_path(name: str) -> list[str]:
         return angels_path
     elif name == heart_angel_str:
         return heart_angels_path
+    elif name == santa_str:
+        return santas_path
+    elif name == heart_santa_str:
+        return heart_santas_path
     else:
         return [] # error
