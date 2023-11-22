@@ -42,7 +42,7 @@ class save_file:
 
     def save(self) -> None: # return x
         data_dict = self.to_dict() # class to dict
-        data_json = json.dumps(data_dict) # dict to json
+        data_json = json.dumps(data_dict, indent = 2) # dict to json 
         with open('save_file.json', 'w') as file: # json to file
             file.write(data_json)
 

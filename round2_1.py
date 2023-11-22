@@ -321,9 +321,9 @@ def round2():
             end_counter += 1
             pygame.display.flip()
         else:
-            round3.round3(save_file.score)
+            round3.round3()
             pygame.display.flip()
     pygame.quit()
 
 
-# round2() #테스트용..
+round2() #테스트용..
