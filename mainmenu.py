@@ -14,6 +14,8 @@ import sys
 import pacman_2
 import option
 import resources.save_files
+import resources.images.mainmenu
+import resources.images.characters
 
 sound = 1
 
@@ -137,7 +139,6 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
     closed_treasure_box = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/closed_treasure_box.png'), (150, 120))
     opened_treasure_box = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/opened_treasure_box.png'),
                                             (150, 120))
-
 
 
     image.append(pacman)
