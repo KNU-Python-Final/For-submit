@@ -47,14 +47,14 @@ box_drop = pygame.mixer.Sound("assets/sounds/box_drop.wav")
 button_sound = pygame.mixer.Sound("assets/sounds/button.wav")
 button_sound.set_volume(0.5)
 
-def Button(img, click_img, x, y, width, height, sound , score = None, action = None, func = None): #sound : 소리 여부    action : 실행할 함수  func : 어떤 함수에서 들어갔는지 -> main_menu에서 들어갈 떄만 실행되는 애 있었으면 해서..
+def Button(img, click_img, x, y, width, height, sound , param = None, action = None, func = None): #sound : 소리 여부    action : 실행할 함수  func : 어떤 함수에서 들어갔는지 -> main_menu에서 들어갈 떄만 실행되는 애 있었으면 해서..
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()#클릭시
     if x + width > mouse[0] > x and y + height > mouse[1] > y:
         screen.blit(click_img,(x,y))
         if func != None:
             pygame.draw.polygon(screen, (195,195,195), [[x-50, y+height//2 - 20], [x-50,y+height//2+20], [x-30, y+height//2]], 5)
-        if click[0] and action != None and score != None: #왼쪽 마우스 눌린 경우 + 이후 실행할 함수 있는 경우 + score주는 경우 -> 걍 사실상 pacman실행
+        if click[0] and action != None and param != None: #왼쪽 마우스 눌린 경우 + 이후 실행할 함수 있는 경우 + score주는 경우 -> 걍 사실상 pacman실행 or option 실행
             if func != None:
                 pygame.draw.polygon(screen, (255, 255, 255),
                                 [[x - 50, y + height // 2 - 20], [x - 50, y + height // 2 + 20],
@@ -65,8 +65,12 @@ def Button(img, click_img, x, y, width, height, sound , score = None, action = N
             if sound == 1:
                 button_sound.play(0)
             time.sleep(1) #1초 지연
-            action()
-        elif click[0] and action != None and score == None:
+            
+            if action == pacman_2.pacman: # 게임 실행인 경우
+                action() # 파라미터 불필요
+            else: # 게임 실행이 아닌 경우 (option 실행인 경우)
+                action(param) # 파라미터 전달
+        elif click[0] and action != None and param == None:
             if func != None:
                 pygame.draw.polygon(screen, (255, 255, 255),
                                 [[x - 50, y + height // 2 - 20], [x - 50, y + height // 2 + 20],
@@ -77,7 +81,7 @@ def Button(img, click_img, x, y, width, height, sound , score = None, action = N
             if sound == 1:
                 button_sound.play(0)
             time.sleep(1)  # 1초 지연
-            action()
+            action(param)
         elif click[0] and action == None: #왼쪽 마우스 눌린 경우 + 이후 실행할 함수 없는 경우 -> 아직 버튼에 함수 안 이은 상태일 때
             if func != None:
                 pygame.draw.polygon(screen, (255, 255, 255), [[x - 50, y + height // 2 - 20], [x - 50, y + height // 2 + 20],

@@ -136,7 +136,7 @@ def color(img, click_img, x, y, width, height): #color_index : 그 직전 결정
 def options(l):
     import mainmenu
 
-    easter,easter_now = l
+    easter, easter_now = l
 
     global sound
     global maze_color
