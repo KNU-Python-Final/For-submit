@@ -1463,5 +1463,3 @@ def pacman():
         save_file.save()
         pygame.display.flip() #화면 전체 업데이트
     pygame.quit() #종료~
-
-# pacman(10000)

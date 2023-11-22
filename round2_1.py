@@ -324,6 +324,3 @@ def round2():
             round3.round3()
             pygame.display.flip()
     pygame.quit()
-
-
-round2() #테스트용..
