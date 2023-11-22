@@ -33,7 +33,6 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT]) #창 가로세로 정하기
 easter_egg1=[0,0,0,0,0,0] #1번 이스터 조건
 easter = 0 # 1번 이스터 상자를 떨궜는지
 easter_now = [0,0] #이스터 에그 발견 현황 -> 1번 이스터 상자 열기까지 했는지
-global score # score 공유 -> 이스터 에그 때문
 global is_earned
 is_earned = False
 
