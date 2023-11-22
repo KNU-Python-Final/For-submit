@@ -1,14 +1,59 @@
-def save(score: int, image_file: str) -> None: # return x
-        with open("info.txt", "w") as file: # info.txt 파일을 "w"(쓰기모드)로 열기
-            file.write(f"Score: {score}, Image: {image_file}") # 문자열을 file에 쓰기
+import json 
+import resources.images.characters as characters # resources.images.characters 를 characters 라고 할게요~
+'''
+json: 텍스트로 된 딕셔너리 (dict만 json 으로 변경 가능)
 
-def load() -> tuple[int, str]: # return int, str # 방광이슈
-    try: # 이미지가 없을 때 (예외의 상황) 를 위한 코드
-        with open("info.txt", "r") as file: # info.txt 파일을 "r"(읽기모드)로 열기
-            data = file.read() # 파일의 내용을 문자열로 읽어 변수에 지정
-            score_part, image_part = data.split(", ") # ", " 를 기준으로 데이터 나누기
-            score = int(score_part.split(": ")[1]) # 두번째 요소를 정수로 반환하여 변수에 지정
-            image_file = image_part.split(": ")[1] # 두번째 요소를 반환하여 변수에 지정
-            return score, image_file # score, image_flie 반환
-    except FileNotFoundError: # 예외 상황시
-        return 0, '2R/images/1.png' # score = 0, image_file = 기본 이미지 로 변경
+직렬화 : dict to json
+json.dumps(딕셔너리) -> str
+
+역직렬화 : json to dict
+json.loads(str) -> dict
+
+
+'''
+# 인벤토리
+class save_file:
+    def __init__(self) -> None: # return x
+        self.score = 0
+        self.image_file = characters.default_str
+        self.inventory = {
+            characters.default_str: True,
+            characters.king_str: False,
+            characters.heart_king_str: False,
+            characters.leaf_str: False,
+            characters.heart_leaf_str: False,
+            characters.angel_str: False,
+            characters.heart_angel_str: False,
+            characters.santa_str: False,
+            characters.heart_santa_str: False,
+        }
+    def to_dict(self) -> dict[str, any]: # json으로 바꿔주기 위해 class를 dict로 바꿈 (class to dict)
+        return {
+            'score' : self.score,
+            'image_file' : self.image_file,
+            'inventory' : self.inventory,
+        }
+
+    def from_dict(self, dict : dict[str, any]) -> None: # json을 class로 바꾸기 위해 'dict를 class에 삽입' (dict to class)
+        self.score = dict['score']
+        self.image_file = dict['image_file']
+        self.inventory = dict['inventory']
+        
+
+    def save(self) -> None: # return x
+        data_dict = self.to_dict() # class to dict
+        data_json = json.dumps(data_dict) # dict to json
+        with open('save_file.json', 'w') as file: # json to file
+            file.write(data_json)
+
+
+    def load(self) -> None: # return x
+        try:
+            with open("save_file.json", "r") as file:
+                json_str = file.read() # file to json
+                json_dict = json.loads(json_str) # json to dict
+                self.from_dict(json_dict) # dict to class
+
+        except FileNotFoundError:
+            self.save()
+            return None

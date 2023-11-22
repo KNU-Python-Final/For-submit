@@ -29,7 +29,7 @@
 #option의 sound랑 연결
 #유령 상자 밖에서 살아나는 버그 해결
 
-def pacman(score):
+def pacman():
     import copy
     from board import boards #보드 파일에서 boards리스트 가져오기
     import pygame
@@ -41,7 +41,8 @@ def pacman(score):
     import resources.images.characters
     from option import maze_index
     from option import sound #sound 설정에서 받고 들리게 설정했으면(1) -> 소리 들리게 if문 처리...
-    score, selected_image = resources.save_files.load()
+    save_file = resources.save_files.save_file()
+    save_file.load()
     if maze_index == 0:
         color = 'green'
     elif maze_index == 1:
@@ -64,7 +65,7 @@ def pacman(score):
     player_images = [] #빈리스트 미리 만들기
     # for i in range(1, 5):
         # player_images.append(pygame.transform.scale(pygame.image.load(f'assets/player_images/{i}.png'), (45, 45))) #이미지 1~4를 가져와서 크기는 바꾸는거임 ->45,45로  -> 그리고 리스트에 추가
-    for image_path in resources.images.characters.get_images_path(selected_image):
+    for image_path in resources.images.characters.get_images_path(save_file.image_file):
         player_images.append(pygame.transform.scale(pygame.image.load(image_path), (50, 50)))
     # 사운드 가져오기
     powerup_sound = pygame.mixer.Sound("assets/sounds/ghost_time.mp3")
@@ -753,7 +754,7 @@ def pacman(score):
 
     def draw_misc(): #score 출력
         if not pause:
-            score_text = font.render(f'Score: {score}', True, 'white') #antialias : True -> 선 부드럽게..
+            score_text = font.render(f'Score: {save_file.score}', True, 'white') #antialias : True -> 선 부드럽게..
             screen.blit(score_text, (10, 920))
             screen.blit(exit_img, (850, 920)) #exit 이미지 화면에 만들기
             score_text = font.render('Lives:', True, 'white')  # lives : 출력
@@ -1121,7 +1122,7 @@ def pacman(score):
             else:
                 inky_x, inky_y, inky_direction = inky.move_clyde()
             clyde_x, clyde_y, clyde_direction = clyde.move_clyde()
-        score, powerup, power_counter, eaten_ghost = check_collisions(score, powerup, power_counter, eaten_ghost) #코인이랑 충돌하는지 + 점수 획득, 유령 먹었는지, 파워업
+        save_file.score, powerup, power_counter, eaten_ghost = check_collisions(save_file.score, powerup, power_counter, eaten_ghost) #코인이랑 충돌하는지 + 점수 획득, 유령 먹었는지, 파워업
 
         # add to if not powerup to check if eaten ghosts
         if not powerup: #파워업 비활성화 됐는데
@@ -1338,7 +1339,7 @@ def pacman(score):
         if powerup and player_circle.colliderect(blinky.rect) and not blinky.dead and not eaten_ghost[0]:#파워업 있는데 살아있는 유령이랑 닿음 + 안 먹힌 유령임
             blinky_dead = True #유령 죽음
             eaten_ghost[0] = True #먹은 것도 True
-            score += (3 ** eaten_ghost.count(True)) * 100 #몇 개 먹었는지에 따라 점수 증가
+            save_file.score += (3 ** eaten_ghost.count(True)) * 100 #몇 개 먹었는지에 따라 점수 증가
 
             ghost_score_text = font.render(f'{(3 * eaten_ghost.count(True)) * 100}', True, 'red')
             screen.blit(ghost_score_text, (blinky_x, blinky_y))
@@ -1348,7 +1349,7 @@ def pacman(score):
         if powerup and player_circle.colliderect(inky.rect) and not inky.dead and not eaten_ghost[1]:
             inky_dead = True
             eaten_ghost[1] = True
-            score += (3 ** eaten_ghost.count(True)) * 100
+            save_file.score += (3 ** eaten_ghost.count(True)) * 100
 
             ghost_score_text = font.render(f'{(3 * eaten_ghost.count(True)) * 100}', True, 'red')
             screen.blit(ghost_score_text, (inky_x, inky_y))
@@ -1357,7 +1358,7 @@ def pacman(score):
         if powerup and player_circle.colliderect(pinky.rect) and not pinky.dead and not eaten_ghost[2]:
             pinky_dead = True
             eaten_ghost[2] = True
-            score += (3 ** eaten_ghost.count(True)) * 100
+            save_file.score += (3 ** eaten_ghost.count(True)) * 100
 
             ghost_score_text = font.render(f'{(3 * eaten_ghost.count(True)) * 100}', True, 'red')
             screen.blit(ghost_score_text, (pinky_x, pinky_y))
@@ -1366,7 +1367,7 @@ def pacman(score):
         if powerup and player_circle.colliderect(clyde.rect) and not clyde.dead and not eaten_ghost[3]:
             clyde_dead = True
             eaten_ghost[3] = True
-            score += (3 ** eaten_ghost.count(True)) * 100
+            save_file.score += (3 ** eaten_ghost.count(True)) * 100
 
             ghost_score_text = font.render(f'{(3 * eaten_ghost.count(True)) * 100}', True, 'red')
             screen.blit(ghost_score_text, (clyde_x, clyde_y))
@@ -1415,14 +1416,13 @@ def pacman(score):
                     inky_dead = False
                     clyde_dead = False
                     pinky_dead = False
-                    score = 0 #이스터에그 먹었어도 게임 끝났으면 코인 초기화.
                     lives = 3
                     level = copy.deepcopy(boards) #게임 도는 동안 level은 오리지널함.
                     game_over = False
                     game_won = False
                 elif event.key == pygame.K_SPACE and game_won:
                     win_sound.stop()
-                    round2_1.round2(score)
+                    round2_1.round2()
                 elif event.key == pygame.K_SPACE: # pause
                     if pause == True:
                         pause = False
@@ -1460,7 +1460,7 @@ def pacman(score):
         if clyde.in_box and clyde_dead:
             clyde_dead = False
 
-        resources.save_files.save(score, selected_image)
+        save_file.save()
         pygame.display.flip() #화면 전체 업데이트
     pygame.quit() #종료~
 

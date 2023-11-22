@@ -37,8 +37,8 @@ global score # score 공유 -> 이스터 에그 때문
 global is_earned
 is_earned = False
 
-score = 0
-score, selected_image = resources.save_files.load()
+save_file = resources.save_files.save_file()
+save_file.load()
 
 # 사운드 가져오기
 click_easter = pygame.mixer.Sound("assets/sounds/click_easter.wav")
@@ -47,7 +47,7 @@ box_drop = pygame.mixer.Sound("assets/sounds/box_drop.wav")
 button_sound = pygame.mixer.Sound("assets/sounds/button.wav")
 button_sound.set_volume(0.5)
 
-def Button(img, click_img, x, y, width, height, sound , score = None, action = None,func = None): #sound : 소리 여부    action : 실행할 함수  func : 어떤 함수에서 들어갔는지 -> main_menu에서 들어갈 떄만 실행되는 애 있었으면 해서..
+def Button(img, click_img, x, y, width, height, sound , score = None, action = None, func = None): #sound : 소리 여부    action : 실행할 함수  func : 어떤 함수에서 들어갔는지 -> main_menu에서 들어갈 떄만 실행되는 애 있었으면 해서..
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()#클릭시
     if x + width > mouse[0] > x and y + height > mouse[1] > y:
@@ -65,7 +65,7 @@ def Button(img, click_img, x, y, width, height, sound , score = None, action = N
             if sound == 1:
                 button_sound.play(0)
             time.sleep(1) #1초 지연
-            action(score)
+            action()
         elif click[0] and action != None and score == None:
             if func != None:
                 pygame.draw.polygon(screen, (255, 255, 255),
@@ -105,11 +105,10 @@ def chain_letters(easter_now,sound): #이스터 에그 보물상자 열 경우 �
     chain_letter = font.render(f'Extra Coin +100000', True,
                                'red')
     screen.blit(chain_letter, (300, 450))
-    global score
     global is_earned
     if not is_earned:
-        score += 100000
-        resources.save_files.save(score, selected_image)  # 게임 종료 시 점수 저장
+        save_file.score += 100000
+        save_file.save()  # 게임 종료 시 점수 저장
         is_earned = True
 
 def quitgame():
@@ -213,12 +212,11 @@ def main_menu(WIDTH,HEIGHT,easter,easter_now,sound):
         font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 30)
         screen.blit(name_text, (150, 0))
 
-        resources.save_files.save(score, selected_image)  # 게임 종료 시 점수 저장
-        startButton = Button(start_img, click_start_img, WIDTH // 2-208//2, 450+100, 208,50, sound, score, pacman_2.pacman,main_menu)
+        startButton = Button(start_img, click_start_img, WIDTH // 2-208//2, 450+100, 208,50, sound, save_file.score, pacman_2.pacman, main_menu)
         opionButton = Button(options_img, click_options_img, WIDTH // 2 - 225 // 2, 450+200, 230, 65,sound,[easter,easter_now], action = option.options,func = main_menu)
         exitbutton = Button(exit_img, click_exit_img, WIDTH // 2 - 160 // 2, 450+330, 160, 52, sound,None, quitgame,func = main_menu)
 
         timer.tick(fps)
         pygame.display.flip()  # 화면 전체 업데이트
 if __name__ == "__main__": # 여기 py안에서 실행될 때만
-    main_menu(WIDTH,HEIGHT,easter,easter_now,sound)
+    main_menu(WIDTH, HEIGHT, easter, easter_now, sound)

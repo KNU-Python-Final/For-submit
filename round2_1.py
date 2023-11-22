@@ -6,12 +6,12 @@ import round3
 import resources.save_files
 import resources.images.characters
 
-def round2(player_score):
+def round2():
     # 1. 게임 초기화
     pygame.init()
     
-    player_score, selected_image = resources.save_files.load()
-
+    save_file = resources.save_files.save_file()
+    save_file.load()
     coin_list = []
     last_bullet_time = 0
     bullet_cooldown = 500  # 500ms = 0.5초
@@ -68,7 +68,7 @@ def round2(player_score):
     ss = obj()
 
     pacman_images = []
-    for image_path in resources.images.characters.get_images_path(selected_image):
+    for image_path in resources.images.characters.get_images_path(save_file.image_file):
         pacman_images.append(pygame.transform.scale(pygame.image.load(image_path), (50, 50)))
 
     ss.put_image(resources.images.characters.default_1_path)  # 시작 이미지 설정
@@ -166,7 +166,7 @@ def round2(player_score):
             # player가 오른쪽 밖으로 나가지 않도록 조정
             if ss.x >= size[0] - ss.sx:
                 ss.x = size[0] - ss.sx
-        if space_go == True and player_score >= 10 and current_time - last_bullet_time > bullet_cooldown:  # 총알 속도 고정
+        if space_go == True and save_file.score >= 10 and current_time - last_bullet_time > bullet_cooldown:  # 총알 속도 고정
             last_bullet_time = current_time  # 마지막 총알 발사 시간 업데이트
             # mm = 총알
             mm = obj()
@@ -176,7 +176,7 @@ def round2(player_score):
             mm.y = ss.y - mm.sy - 10  # player의 주둥이보다 조금 더 앞에서 총알이 나가도록 조정
             mm.move = 20
             bullet_list.append(mm)
-            player_score -= 10  # score 차감
+            save_file.score -= 10  # score 차감
         '''
         if 문 밖에 k가 있는 이유 :
         k는 게임의 메인루프가 반복 될때마다 증가
@@ -233,7 +233,7 @@ def round2(player_score):
         for coin in coin_list[:]:
             if circle_crash(coin, ss):
                 coin_list.remove(coin)
-                player_score += 10  # 플레이어 점수 증가
+                save_file.score += 10  # 플레이어 점수 증가
 
         # 코인 삭제 로직
         for d in reversed(coin_delete_list):
@@ -292,7 +292,7 @@ def round2(player_score):
         text_time = font.render("time : {}".format(delta_time), True, (255, 255, 255))
         screen.blit(text_time, (size[0] - 100, 5))
 
-        text_score = font.render("score : {}".format(player_score), True, (255, 255, 255))
+        text_score = font.render("score : {}".format(save_file.score), True, (255, 255, 255))
         screen.blit(text_score, (size[0] - 250, 5))
 
         # 4-5. 업데이트
@@ -304,14 +304,14 @@ def round2(player_score):
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                resources.save_files.save(player_score, selected_image)  # 게임 종료 시 점수 저장
+                save_file.save()  # 게임 종료 시 점수 저장
                 is_gameovered = 0
         font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 35)
-        text = font.render(f"Final Score : {player_score}", True, 'white')
+        text = font.render(f"Final Score : {save_file.score}", True, 'white')
         screen.blit(text, (100, round(size[1] / 2 - 130)))
         text = font.render(f"SCORE -> COIN", True, 'yellow')
         screen.blit(text, (160, round(size[1] / 2 - 30)))
-        text = font.render(f"Final Coin  : {player_score}", True, 'white')
+        text = font.render(f"Final Coin  : {save_file.score}", True, 'white')
         screen.blit(text, (100, round(size[1] / 2 + 70)))
         if end_counter < 60*8:
             font = pygame.font.Font("assets/pacman_main_menu_images/neodgm.ttf", 25)
@@ -321,9 +321,9 @@ def round2(player_score):
             end_counter += 1
             pygame.display.flip()
         else:
-            round3.round3(player_score)
+            round3.round3(save_file.score)
             pygame.display.flip()
     pygame.quit()
 
 
-# round2(10000) #테스트용..
+# round2() #테스트용..
