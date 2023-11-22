@@ -1460,10 +1460,7 @@ def pacman(score):
         if clyde.in_box and clyde_dead:
             clyde_dead = False
 
-
-
-
-
+        resources.save_files.save(score, selected_image)
         pygame.display.flip() #화면 전체 업데이트
     pygame.quit() #종료~
 

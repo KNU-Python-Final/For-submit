@@ -8,13 +8,14 @@
 #back 눌렀을 때도 설정 바뀌는 오류 발견ㄴ....ㅜㅜㅜㅠ => 리스트로 그 전 눌ㄹ렀던 애들 받으면 답 없음. 무한루프라 1111111이런식으로 나옴.
 #23.11.20
 #1~3라운드 다 이음
+
+# 1라운드 score 저장 안되거나, 2라운드에서 로드 안됨
 import pygame
 import time
 import sys
 import pacman_2
 import option
 import resources.save_files
-import resources.images.mainmenu
 import resources.images.characters
 
 sound = 1
