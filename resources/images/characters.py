@@ -1,9 +1,9 @@
 angel_str = 'angel'
 
-angel_1_path = './images/angel/1.png'
-angel_2_path = './images/angel/2.png'
-angel_3_path = './images/angel/3.png'
-angel_4_path = './images/angel/4.png'
+angel_1_path = './assets/3round_images/angel/1.png'
+angel_2_path = './assets/3round_images/angel/2.png'
+angel_3_path = './assets/3round_images/angel/3.png'
+angel_4_path = './assets/3round_images/angel/4.png'
 angels_path = [
     angel_1_path, 
     angel_2_path, 
@@ -13,10 +13,10 @@ angels_path = [
 
 heart_angel_str = 'heart_angel'
 
-heart_angel_1_path = './images/heart_angel/1.png'
-heart_angel_2_path = './images/heart_angel/2.png'
-heart_angel_3_path = './images/heart_angel/3.png'
-heart_angel_4_path = './images/heart_angel/4.png'
+heart_angel_1_path = './assets/3round_images/heart_angel/1.png'
+heart_angel_2_path = './assets/3round_images/heart_angel/2.png'
+heart_angel_3_path = './assets/3round_images/heart_angel/3.png'
+heart_angel_4_path = './assets/3round_images/heart_angel/4.png'
 heart_angels_path = [
     heart_angel_1_path, 
     heart_angel_2_path, 
@@ -27,10 +27,10 @@ heart_angels_path = [
 
 king_str = 'king'
 
-king_1_path = './images/king/1.png'
-king_2_path = './images/king/2.png'
-king_3_path = './images/king/3.png'
-king_4_path = './images/king/4.png'
+king_1_path = './assets/3round_images/king/1.png'
+king_2_path = './assets/3round_images/king/2.png'
+king_3_path = './assets/3round_images/king/3.png'
+king_4_path = './assets/3round_images/king/4.png'
 kings_path = [
     king_1_path, 
     king_2_path, 
@@ -41,10 +41,10 @@ kings_path = [
 
 heart_king_str = 'heart_king'
 
-heart_king_1_path = './images/heart_king/1.png'
-heart_king_2_path = './images/heart_king/2.png'
-heart_king_3_path = './images/heart_king/3.png'
-heart_king_4_path = './images/heart_king/4.png'
+heart_king_1_path = './assets/3round_images/heart_king/1.png'
+heart_king_2_path = './assets/3round_images/heart_king/2.png'
+heart_king_3_path = './assets/3round_images/heart_king/3.png'
+heart_king_4_path = './assets/3round_images/heart_king/4.png'
 heart_kings_path = [
     heart_king_1_path, 
     heart_king_2_path, 
@@ -55,10 +55,10 @@ heart_kings_path = [
 
 leaf_str = 'leaf'
 
-leaf_1_path = './images/leaf/1.png'
-leaf_2_path = './images/leaf/2.png'
-leaf_3_path = './images/leaf/3.png'
-leaf_4_path = './images/leaf/4.png'
+leaf_1_path = './assets/3round_images/leaf/1.png'
+leaf_2_path = './assets/3round_images/leaf/2.png'
+leaf_3_path = './assets/3round_images/leaf/3.png'
+leaf_4_path = './assets/3round_images/leaf/4.png'
 leafs_path = [
     leaf_1_path, 
     leaf_2_path, 
@@ -69,10 +69,10 @@ leafs_path = [
 
 heart_leaf_str = 'heart_leaf'
 
-heart_leaf_1_path = './images/heart_leaf/1.png'
-heart_leaf_2_path = './images/heart_leaf/2.png'
-heart_leaf_3_path = './images/heart_leaf/3.png'
-heart_leaf_4_path = './images/heart_leaf/4.png'
+heart_leaf_1_path = './assets/3round_images/heart_leaf/1.png'
+heart_leaf_2_path = './assets/3round_images/heart_leaf/2.png'
+heart_leaf_3_path = './assets/3round_images/heart_leaf/3.png'
+heart_leaf_4_path = './assets/3round_images/heart_leaf/4.png'
 heart_leafs_path = [
     heart_leaf_1_path, 
     heart_leaf_2_path, 
@@ -83,10 +83,10 @@ heart_leafs_path = [
 
 default_str = 'default'
 
-default_1_path = './images/default/1.png'
-default_2_path = './images/default/2.png'
-default_3_path = './images/default/3.png'
-default_4_path = './images/default/4.png'
+default_1_path = './assets/3round_images/default/1.png'
+default_2_path = './assets/3round_images/default/2.png'
+default_3_path = './assets/3round_images/default/3.png'
+default_4_path = './assets/3round_images/default/4.png'
 defaults_path = [
     default_1_path, 
     default_2_path, 
