@@ -46,11 +46,11 @@ def pacman():
     if maze_index == 0:
         color = 'green'
     elif maze_index == 1:
-        color = (46,135,255)
+        color = (46, 135, 255)
     elif maze_index == 2:
-        color = (251,171,197)
+        color = (251, 171, 197)
     elif maze_index == 3:
-        color = (255,222,10)
+        color = (255, 222, 10)
 
 
     WIDTH = 900

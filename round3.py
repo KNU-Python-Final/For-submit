@@ -2,6 +2,7 @@ import pygame
 import time
 import resources.images.characters
 import resources.save_files
+import resources.images.etc
 
 def round3():
     pygame.init()
@@ -47,11 +48,17 @@ def round3():
     while run:
         screen.blit(background_image, (0, 0))
 
-        # 버튼 4개 그리기
-        button_king = pygame.draw.rect(screen, button_colors[0], (70, 215, 300, 70)) # x좌표, y좌표, 너비, 높이
-        button_angel = pygame.draw.rect(screen, button_colors[1], (70, 475, 300, 70))
-        button_leaf = pygame.draw.rect(screen, button_colors[2], (70, 345, 300, 70))
-        button_santa = pygame.draw.rect(screen, button_colors[3], (70, 605, 300, 70))
+        # buy 버튼 4개 그리기
+        button_king = pygame.draw.rect(screen, button_colors[0], (70, 235, 260, 70), border_radius=35) # x좌표, y좌표, 너비, 높이, R
+        button_santa = pygame.draw.rect(screen, button_colors[1], (70, 345, 260, 70), border_radius=35)
+        button_angel = pygame.draw.rect(screen, button_colors[2], (70, 475, 260, 70), border_radius=35)
+        button_leaf = pygame.draw.rect(screen, button_colors[3], (70, 605, 260, 70), border_radius=35)
+
+        # 기타 버튼 그리기
+        exit_button = pygame.draw.rect(screen, button_colors[1], (860, 910, 40, 40))
+        restart_button = pygame.draw.rect(screen, (0, 0, 0), (820, 910, 40, 40))
+        random_button = pygame.draw.rect(screen, button_colors[1], (150, 750, 100, 100))
+
 
         for event in pygame.event.get(): # 이벤트 순회
             if event.type == pygame.QUIT:
@@ -156,6 +163,9 @@ def round3():
                 insufficient_score_message = False  # 1초가 지나면 메시지 표시를 중단
 
         screen.blit(exit_img, exit_button.topleft)
+        screen.blit(resources.images.etc.shop_sign_path, (250, 0))
+        screen.blit(resources.images.etc.heart_convert_path, (535, 235))
+        screen.blit(resources.images.etc.return_sign_path, (820, 910))
         pygame.display.update()
 
     pygame.quit()
