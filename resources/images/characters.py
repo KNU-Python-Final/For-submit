@@ -121,6 +121,38 @@ defaults_path = [
     default_4_path, 
 ]
 
+angel_sign_path = './assets/3round_images/etc/angel_sign.png'
+angel_sign_str = 'angel_sign'
+
+bg_path = './assets/3round_images/etc/bg.png'
+bg_sign_str = 'bg_sign'
+
+buy_sign_path = './assets/3round_images/etc/buy_sign.png'
+buy_sign_str = 'buy_sign'
+
+heart_convert_path = './assets/3round_images/etc/heart_convert.png'
+heart_convert_str = 'heart_convert'
+
+exit_path = './assets/3round_images/etc/exit.png'
+exit_str = 'exit_path'
+
+king_sign_path = './assets/3round_images/etc/king_sing.png'
+king_sign_str = 'king_sign'
+
+leaf_sign_path = './assets/3round_images/etc/leaf_sing.png'
+leaf_sign_str = 'leaf_sign'
+
+santa_sign_path = './assets/3round_images/etc/santa_sing.png'
+santa_sign_str = 'santa_sign'
+
+shop_sign_path = './assets/3round_images/etc/shop_sing.png'
+shop_sign_str = 'shop_sign'
+
+return_sign_path = './assets/3round_images/etc/return.png'
+return_sign_str = 'return_sign'
+
+
+
 def get_image_path(name: str) -> str:
     if name == default_str:
         return default_1_path
@@ -140,6 +172,27 @@ def get_image_path(name: str) -> str:
         return santa_1_path
     elif name == heart_santa_str:
         return heart_santa_1_path
+    
+    elif name == angel_sign_str:
+        return angel_sign_path
+    elif name == bg_sign_str:
+        return bg_path
+    elif name == buy_sign_str:
+        return buy_sign_path
+    elif name == heart_convert_str:
+        return heart_convert_path
+    elif name == exit_str:
+        return exit_path
+    elif name == king_sign_str:
+        return king_sign_path
+    elif name == leaf_sign_str:
+        return leaf_sign_path
+    elif name == santa_sign_str:
+        return santa_sign_path
+    elif name == shop_sign_str:
+        return shop_sign_path
+    elif name == return_sign_str:
+        return return_sign_path
     else:
         return '' # error
 

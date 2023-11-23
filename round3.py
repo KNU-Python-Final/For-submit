@@ -2,7 +2,7 @@ import pygame
 import time
 import resources.images.characters
 import resources.save_files
-import resources.images.etc
+
 
 def round3():
     pygame.init()
@@ -163,9 +163,7 @@ def round3():
                 insufficient_score_message = False  # 1초가 지나면 메시지 표시를 중단
 
         screen.blit(exit_img, exit_button.topleft)
-        screen.blit(resources.images.etc.shop_sign_path, (250, 0))
-        screen.blit(resources.images.etc.heart_convert_path, (535, 235))
-        screen.blit(resources.images.etc.return_sign_path, (820, 910))
+    
         pygame.display.update()
 
     pygame.quit()
