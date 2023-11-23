@@ -39,10 +39,10 @@ def round3():
             return pygame.transform.scale(pygame.image.load(resources.images.characters.get_image_path(selected_image)), (300, 300))
 
     prices = {
-        resources.images.characters.king_str : 100000,
-        resources.images.characters.angel_str: 60000,
-        resources.images.characters.leaf_str: 80000,
-        resources.images.characters.santa_str: 90000
+        resources.images.characters.king_str : 10000,
+        resources.images.characters.angel_str: 6000,
+        resources.images.characters.leaf_str: 5000,
+        resources.images.characters.santa_str: 8000
     }
     selected_price = None
     buy_button = None
