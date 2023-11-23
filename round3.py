@@ -54,16 +54,13 @@ def round3():
         screen.blit(background_image, (0, 0))
 
         # buy 버튼 4개 그리기
-        button_king = pygame.draw.rect(screen, button_colors[0], (70, 235, 260, 70), border_radius=35) # x좌표, y좌표, 너비, 높이, R
-        button_santa = pygame.draw.rect(screen, button_colors[1], (70, 345, 260, 70), border_radius=35)
-        button_angel = pygame.draw.rect(screen, button_colors[2], (70, 475, 260, 70), border_radius=35)
-        button_leaf = pygame.draw.rect(screen, button_colors[3], (70, 605, 260, 70), border_radius=35)
+        button_king = pygame.draw.rect(screen, button_colors[0], (70, 235, 260, 70), border_radius = 35) # x좌표, y좌표, 너비, 높이, R
+        button_santa = pygame.draw.rect(screen, button_colors[1], (70, 345, 260, 70), border_radius = 35)
+        button_angel = pygame.draw.rect(screen, button_colors[2], (70, 475, 260, 70), border_radius = 35)
+        button_leaf = pygame.draw.rect(screen, button_colors[3], (70, 605, 260, 70), border_radius = 35)
 
         # 기타 버튼 그리기
-        exit_button = pygame.draw.rect(screen, button_colors[1], (860, 910, 40, 40))
         restart_button = pygame.draw.rect(screen, (0, 0, 0), (820, 910, 40, 40))
-        random_button = pygame.draw.rect(screen, button_colors[1], (150, 750, 100, 100))
-
 
         for event in pygame.event.get(): # 이벤트 순회
             if event.type == pygame.QUIT:
@@ -122,7 +119,7 @@ def round3():
 
         if not selected_image == '': # 이미지가 할당 되었는지 확인 (비어있지 않다면)
             screen.blit(get_image(selected_image), (500, 300)) # 500, 300에 지정된 이미지 그리기
-            buy_button = pygame.draw.rect(screen, button_colors[4], (520, 675, 250, 50)) # (520, 675)에 250x50 크기의 버튼 생성
+            buy_button = pygame.draw.rect(screen, button_colors[4], (520, 675, 250, 50), border_radius = 35) # (520, 675)에 250x50 크기의 버튼 생성
             buy_text_str = 'BUY' # 처음엔 사
             if save_file.inventory[selected_image]: # 이미 샀음 (소지 중)
                 buy_text_str = 'EQUIP'
@@ -133,8 +130,8 @@ def round3():
             # buy_button 중앙에 buy_text 배치
             screen.blit(buy_text, (buy_button.x + (buy_button.width - buy_text.get_width()) // 2, buy_button.y + (buy_button.height - buy_text.get_height()) // 2))
             if selected_price is not None:
-                price_text = price_font.render(f'{selected_price}', True, (255, 255, 255))
-                screen.blit(price_text, (520, 640))  # 가격 텍스트 위치 조정 필요
+                price_text = price_font.render(f'{selected_price}', True, (0, 255, 0))
+                screen.blit(price_text, (600, 630))  # 가격 텍스트 위치 조정 필요
         score_text = font.render(f'Score: {save_file.score}', True, (255, 255, 255)) # 텍스트 렌더링
         screen.blit(score_text, (10, 10)) # 렌더링된 텍스트를 화면에 표시
 
@@ -149,15 +146,9 @@ def round3():
         for text, (x, y) in zip(button_texts, button_positions):
             screen.blit(text, (x + 150 - text.get_width() // 2, y + 35 - text.get_height() // 2)) # 텍스트를 버튼의 중앙에 오도록 배치
 
-        button_heart_version = pygame.draw.rect(screen, (255, 255, 255), (550, 250, 30, 30))
-        exit_button = pygame.draw.rect(screen, (255, 255, 255), (860, 910, 40, 40))
-        restart_button = pygame.draw.rect(screen, (255, 255, 255), (820, 910, 40, 40))
-
-
-        shop_text = shop_font.render('SHOP', True, (255, 255, 255)) # shop 렌더링
-        shop_text_rect = shop_text.get_rect(center=(WIDTH // 2, 50)) # shop rect 렌더링
-        pygame.draw.rect(screen, (128, 128, 128), shop_text_rect.inflate(20, 20)) # inflate = 사각형을 텍스트 영역보다 20 픽셀씩 크기 생성
-        screen.blit(shop_text, shop_text_rect) # 렌더링된 텍스트를 화면에 표시
+        button_heart_version = pygame.draw.rect(screen, (255, 255, 255), (550, 250, 30, 30), border_radius = 150)
+        exit_button = pygame.draw.rect(screen, (0, 0, 0), (860, 910, 40, 40), border_radius = 150)
+        # restart_button = pygame.draw.rect(screen, (255, 255, 255), (820, 910, 40, 40), border_radius = 150)
         
         if insufficient_score_message:
             current_time = time.time()
@@ -173,7 +164,6 @@ def round3():
         screen.blit(leaf_sign_image, (50, 570))
         screen.blit(santa_sign_image, (50, 320))
         screen.blit(king_sign_image, (50, 200))
-        screen.blit(buy_sign_image, (50, 50))
         screen.blit(heart_sign_image, (535, 235))
         screen.blit(return_sign_image, (820, 910))
 

@@ -1,15 +1,15 @@
 {
-  "score": 18910,
-  "image_file": "santa",
+  "score": 179710910,
+  "image_file": "heart_king",
   "inventory": {
     "default": false,
-    "king": false,
-    "heart_king": false,
+    "king": true,
+    "heart_king": true,
     "leaf": false,
     "heart_leaf": false,
     "angel": false,
     "heart_angel": false,
-    "santa": false,
+    "santa": true,
     "heart_santa": false
   }
 }
