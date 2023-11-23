@@ -146,6 +146,7 @@ def round2():
                     space_go = False
         current_image_index = k // 10 % len(pacman_images)  # 10프레임마다 이미지 변경
         ss.img = pacman_images[current_image_index]  # 현재 이미지 업데이트
+        ss.img = pygame.transform.rotate(ss.img, 90)
 
         # 4-3. 입력, 시간에 따른 변화
         now_time = datetime.now()
