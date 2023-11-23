@@ -104,7 +104,7 @@ def chain_letters(easter_now,sound): #이스터 에그 보물상자 열 경우 �
         open_the_box.play(0)
     easter_now[0] = 1
     font = pygame.font.Font("assets/pacman_main_menu_images/NPSfont_regular.ttf", 26)
-    chain_letter = font.render(f'강남대 구모씨가 숨긴 이스터에그를 발견하셨습니다! 남은 이스터에그 :  {easter_now.count(1)}개', True,
+    chain_letter = font.render(f'강남대 구모씨가 숨긴 이스터에그를 발견하셨습니다! 남은 이스터에그 :  {easter_now.count(0)}개', True,
                             'green')
     screen.blit(chain_letter, (50, 400))
     chain_letter = font.render(f'Extra Coin +100000', True,

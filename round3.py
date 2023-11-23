@@ -22,13 +22,18 @@ def round3():
 
     button_colors = [(255, 165, 0), (0, 191, 255), (255, 69, 0), (138, 43, 226), (128, 128, 128)] # 버튼의 색상(RGB) 지정
 
-    # 이미지 경로 지정
-    
-    exit_image_path = './assets/3round_images/etc/exit.png'
-    background_image_path = './assets/3round_images/etc/bg.png'
+    exit_img = pygame.transform.scale(pygame.image.load(resources.images.characters.exit_path), (40, 40))
+    background_image = pygame.image.load(resources.images.characters.bg_path)
+    shop_image = pygame.transform.scale(pygame.image.load(resources.images.characters.shop_sign_path), (400, 150))
+    angel_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.angel_sign_path), (300, 130))
+    king_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.king_sign_path), (300, 130))
+    leaf_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.leaf_sign_path), (300, 130))
+    santa_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.santa_sign_path), (300, 130))
+    buy_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.buy_sign_path), (300, 130))
+    heart_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.heart_convert_path), (60, 60))
+    return_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.return_sign_path), (40, 40))
 
-    exit_img = pygame.transform.scale(pygame.image.load(exit_image_path), (40, 40))
-    background_image = pygame.image.load(background_image_path)
+
 
     def get_image(name):
             return pygame.transform.scale(pygame.image.load(resources.images.characters.get_image_path(selected_image)), (300, 300))
@@ -163,6 +168,16 @@ def round3():
                 insufficient_score_message = False  # 1초가 지나면 메시지 표시를 중단
 
         screen.blit(exit_img, exit_button.topleft)
+        screen.blit(shop_image, (250, 0))
+        screen.blit(angel_sign_image, (50, 440))
+        screen.blit(leaf_sign_image, (50, 570))
+        screen.blit(santa_sign_image, (50, 320))
+        screen.blit(king_sign_image, (50, 200))
+        screen.blit(buy_sign_image, (50, 50))
+        screen.blit(heart_sign_image, (535, 235))
+        screen.blit(return_sign_image, (820, 910))
+
+
     
         pygame.display.update()
 

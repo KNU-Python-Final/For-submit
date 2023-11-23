@@ -136,16 +136,16 @@ heart_convert_str = 'heart_convert'
 exit_path = './assets/3round_images/etc/exit.png'
 exit_str = 'exit_path'
 
-king_sign_path = './assets/3round_images/etc/king_sing.png'
+king_sign_path = './assets/3round_images/etc/king_sign.png'
 king_sign_str = 'king_sign'
 
-leaf_sign_path = './assets/3round_images/etc/leaf_sing.png'
+leaf_sign_path = './assets/3round_images/etc/leaf_sign.png'
 leaf_sign_str = 'leaf_sign'
 
-santa_sign_path = './assets/3round_images/etc/santa_sing.png'
+santa_sign_path = './assets/3round_images/etc/santa_sign.png'
 santa_sign_str = 'santa_sign'
 
-shop_sign_path = './assets/3round_images/etc/shop_sing.png'
+shop_sign_path = './assets/3round_images/etc/shop_sign.png'
 shop_sign_str = 'shop_sign'
 
 return_sign_path = './assets/3round_images/etc/return.png'
