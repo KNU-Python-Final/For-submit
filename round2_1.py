@@ -10,6 +10,10 @@ def round2():
     # 1. 게임 초기화
     pygame.init()
     
+    pygame.mixer.init()  # 믹서 초기화
+    pygame.mixer.music.load('./assets/sounds/2round_bg.mp3')  # 음악 파일 로드
+    pygame.mixer.music.play(-1)  # 음악 재생, '-1'은 음악이 끝나면 다시 시작하도록 함
+
     save_file = resources.save_files.save_file()
     save_file.load()
     coin_list = []
@@ -324,4 +328,5 @@ def round2():
         else:
             round3.round3()
             pygame.display.flip()
+        pygame.mixer.music.stop()
     pygame.quit()
