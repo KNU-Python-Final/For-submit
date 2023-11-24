@@ -9,7 +9,7 @@ def round3():
     pygame.mixer.init()
     buy_button_music = pygame.mixer.Sound('./assets/sounds/2round_bg.mp3')  # 음악 파일 로드
     buy_button_music = pygame.mixer.Sound('./assets/sounds/open_the_box.wav')  # 음악 파일 로드
-    buy_button_music.set_volume(0.7)
+    buy_button_music.set_volume(0.7) # 볼륨 설정
     save_file = resources.save_files.save_file() # 빈 save_file 생성
     save_file.load() # save_file 변수에 json 입력
 
@@ -20,7 +20,6 @@ def round3():
 
     font = pygame.font.SysFont('arial', 24)
     price_font = pygame.font.SysFont('arial', 30)
-    shop_font = pygame.font.SysFont('arial', 40)
     button_font = pygame.font.SysFont('arial', 40)
 
     button_colors = [(255, 165, 0), (0, 191, 255), (255, 69, 0), (138, 43, 226), (128, 128, 128)] # 버튼의 색상(RGB) 지정
@@ -35,12 +34,13 @@ def round3():
     buy_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.buy_sign_path), (300, 130))
     heart_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.heart_convert_path), (60, 60))
     return_sign_image = pygame.transform.scale(pygame.image.load(resources.images.characters.return_sign_path), (40, 40))
-
-
-
+    '''
+    선택한 이미지 로드하기
+    '''
     def get_image(name):
             return pygame.transform.scale(pygame.image.load(resources.images.characters.get_image_path(selected_image)), (300, 300))
 
+    # 이미지마다 가격 설정
     prices = {
         resources.images.characters.king_str : 10000,
         resources.images.characters.angel_str: 6000,
@@ -161,7 +161,8 @@ def round3():
                 screen.blit(insufficient_score_text, (WIDTH / 2 - insufficient_score_text.get_width() / 2, HEIGHT / 2))
             else:
                 insufficient_score_message = False  # 1초가 지나면 메시지 표시를 중단
-
+        
+        # 이미지 화면에 띄우기
         screen.blit(exit_img, exit_button.topleft)
         screen.blit(shop_image, (250, 0))
         screen.blit(angel_sign_image, (50, 440))
