@@ -87,7 +87,7 @@ def Button(img, click_img, x, y, width, height, sound , param = None, action = N
         pygame.display.flip()
 
 
-def chain_letters(easter_now,sound): #이스터 에그 보물상자 열 경우 텍스트와 사운드~ sound : 소리여부
+def chain_letters(easter_now,sound): # 이스터 에그 보물상자 열 경우 텍스트와 사운드 sound : 소리여부
     if easter_now[0] == 0 and sound == 1: # 이스터에그 1번 상자 열기 + 사운드 O
         open_the_box.play(0)
     easter_now[0] = 1
@@ -142,9 +142,9 @@ def main_menu(WIDTH, HEIGHT, easter, easter_now, sound):
         for event in pygame.event.get():  # 모든 이벤트들 리스트로 해서 event에 하나씩 for문으로 넣어줌
             if event.type == pygame.QUIT:
                 quitgame()
-            #이스터에그 -> 모든 유령과 팩맨, 코인 눌러서 없애기
+            # 이스터에그 -> 모든 유령과 팩맨, 코인 눌러서 없애기
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1: #왼쪽 마우스 클릭
+                if event.button == 1: # 왼쪽 마우스 클릭
                     mouse_x, mouse_y = event.pos
                     for i in range(len(image)):
                         if WIDTH // 2 - 100 + i*50 + 45 > mouse_x > WIDTH // 2 - 100 + i*50 and 370 + 45 > mouse_y > 370 and not easter and not easter_now[0]: # ???
@@ -157,7 +157,7 @@ def main_menu(WIDTH, HEIGHT, easter, easter_now, sound):
                             click_easter.play(0)
                         easter_egg1[5] = 1
                         screen.blit(black1, (WIDTH // 2 - 125 - 10, 395 - 10))
-                    #이스터에그 깨고 보물상자 나와서 그 보물상자 누르면 -> 보물상자 열리고 행운의 편지 등장
+                    # 이스터에그 깨고 보물상자 나와서 그 보물상자 누르면 -> 보물상자 열리고 행운의 편지 등장
                     elif (WIDTH//2 - 75 + 150 > mouse_x > WIDTH//2 - 75) and (350+120 > mouse_y > 350) and easter: #상자 나왔지만 아직 안 열었음
                         screen.blit(black2, (WIDTH // 2 - 75, 350))
                         screen.blit(opened_treasure_box, (WIDTH // 2 - 75, 350))

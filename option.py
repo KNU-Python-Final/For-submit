@@ -138,13 +138,13 @@ def options(l):
 
     easter, easter_now = l
 
-    global sound
+    global sound # 전역변수로 사용
     global maze_color
     while True:
         for event in pygame.event.get():  # 모든 이벤트들 리스트로 해서 event에 하나씩 for문으로 넣어줌
             if event.type == pygame.QUIT:
                 mainmenu.quitgame()
-        screen.blit(setting,(WIDTH//2-709//2,30))  # option밑그림
+        screen.blit(setting,(WIDTH//2-709//2,30)) # option 밑그림
         for i in range(4): #색 체크칸
             screen.blit(colors[i], (WIDTH // 2 - 620 // 2+i*170, 650))
         screen.blit(best, (WIDTH // 2 - 685 // 2, 610))
@@ -154,13 +154,13 @@ def options(l):
 
         Button(save, clicked_save, WIDTH // 2 - 201//2, 800, 201,98, WIDTH, HEIGHT, easter,easter_now,sound,action=mainmenu.main_menu)
 
-        sound = sound_button(yes, clicked_yes,WIDTH // 2 - 400 // 2+1*300, 400,100,100)
-        sound = sound_button(no, clicked_no, WIDTH // 2 - 400 // 2+0*300, 400,100,100)
+        sound = sound_button(yes, clicked_yes,WIDTH // 2 - 400 // 2+1*300, 400,100,100) # 사운드 O
+        sound = sound_button(no, clicked_no, WIDTH // 2 - 400 // 2+0*300, 400,100,100) # 사운드 X
 
-        maze_color = color(green, clicked_green, WIDTH // 2 - 620 // 2 + 0 * 170, 650,100,100)
-        maze_color = color(blue, clicked_blue, WIDTH // 2 - 620 // 2+1*170, 650, 100,100)
-        maze_color = color(pink, clicked_pink, WIDTH // 2 - 620 // 2 + 2 * 170, 650, 100,100)
-        maze_color = color(yellow, clicked_yellow, WIDTH // 2 - 620 // 2 + 3 * 170, 650,100,100)
+        maze_color = color(green, clicked_green, WIDTH // 2 - 620 // 2 + 0 * 170, 650, 100, 100)
+        maze_color = color(blue, clicked_blue, WIDTH // 2 - 620 // 2+1*170, 650, 100, 100)
+        maze_color = color(pink, clicked_pink, WIDTH // 2 - 620 // 2 + 2 * 170, 650, 100, 100)
+        maze_color = color(yellow, clicked_yellow, WIDTH // 2 - 620 // 2 + 3 * 170, 650, 100, 100)
 
 
         timer.tick(fps)
