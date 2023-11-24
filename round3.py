@@ -7,7 +7,9 @@ import resources.save_files
 def round3():
     pygame.init()
     pygame.mixer.init()
-
+    buy_button_music = pygame.mixer.Sound('./assets/sounds/2round_bg.mp3')  # 음악 파일 로드
+    buy_button_music = pygame.mixer.Sound('./assets/sounds/open_the_box.wav')  # 음악 파일 로드
+    buy_button_music.set_volume(0.7)
     save_file = resources.save_files.save_file() # 빈 save_file 생성
     save_file.load() # save_file 변수에 json 입력
 
@@ -82,6 +84,7 @@ def round3():
                     selected_price = prices[resources.images.characters.santa_str]
                 
                 if buy_button and buy_button.collidepoint(mouse_pos): # BUY 버튼을 눌렀을 경우
+                    buy_button_music.play() 
                     if save_file.inventory[selected_image]: # 현재 보고 있는 상품이 소지 중인 경우
                         if not save_file.image_file == selected_image: # 현재 착용중인 상품 != 보고 있는 상품
                             save_file.image_file = selected_image
@@ -122,7 +125,6 @@ def round3():
             screen.blit(get_image(selected_image), (500, 300)) # 500, 300에 지정된 이미지 그리기
             buy_button = pygame.draw.rect(screen, button_colors[4], (520, 675, 250, 50), border_radius = 35) # (520, 675)에 250x50 크기의 버튼 생성
             buy_text_str = 'BUY' # 처음엔 사
-            
             if save_file.inventory[selected_image]: # 이미 샀음 (소지 중)
                 buy_text_str = 'EQUIP'
                 if save_file.image_file == selected_image: # 이미 샀으면서 현재 사용 중
