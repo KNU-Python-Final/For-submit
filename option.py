@@ -24,14 +24,14 @@ clicked_green = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_me
 clicked_blue = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/clicked_blue.png'), (100, 100))
 clicked_pink = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/clicked_pink.png'), (100, 100))
 clicked_yellow = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/clicked_yellow.png'), (100, 100))
-#미로 색상 리스트 만들기
+# 미로 색상 리스트 만들기
 colors = []
 colors.append(green)
 colors.append(blue)
 colors.append(pink)
 colors.append(yellow)
 
-#안 누른 기본 sound 리스트 만들기
+# 안 누른 기본 sound 리스트 만들기
 unclicked_sound = []
 unclicked_sound.append(no)
 unclicked_sound.append(yes)
@@ -112,24 +112,24 @@ def color(img, click_img, x, y, width, height): #color_index : 그 직전 결정
     elif maze_color == yellow:
         maze_index = 3
 
-    #소리
+    # 소리
     color_button_sound = pygame.mixer.Sound("assets/sounds/color_button.mp3")
     color_button_sound.set_volume(0.5)
 
     mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()#클릭시
+    click = pygame.mouse.get_pressed() # 클릭시
 
     screen.blit(clicked_colors[maze_index], (WIDTH // 2 - 620 // 2+maze_index*170, 650)) #현재 선택되어있는 색 체크중
     if maze_index == 0: # 초록색은 위에 베스트 표시 있어야해서..
         screen.blit(best, (WIDTH // 2 - 685 // 2, 610))
     if x + width > mouse[0] > x and y + height > mouse[1] > y:
-        #screen.blit(click_img,(x,y))
-        if click[0] and maze_color!=img: #현재 색상 아닌 색 선택
+        # screen.blit(click_img,(x,y))
+        if click[0] and maze_color!=img: # 현재 색상 아닌 색 선택
             screen.blit(colors[maze_index], (WIDTH // 2 - 620 // 2+maze_index*170, 650))
             screen.blit(click_img, (x, y))
             color_button_sound.play(0)
             return img
-        if click[0] and maze_color==img: #지금 누르는 색이 원래 결정되었던 색인 경우
+        if click[0] and maze_color==img: # 지금 누르는 색이 원래 결정되었던 색인 경우
             screen.blit(click_img, (x, y))
             return img
 
