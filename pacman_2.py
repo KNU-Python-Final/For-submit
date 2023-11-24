@@ -56,7 +56,7 @@ def pacman():
     dead_up_img = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/eye_up.png'), (45, 45))
     dead_down_img = pygame.transform.scale(pygame.image.load(f'assets/pacman_main_menu_images/eye_down.png'), (45, 45))
 
-    exit_img = pygame.transform.scale(pygame.image.load(f'assets/game_over/exit.png'), (40, 40))
+    exit_img = pygame.transform.scale(pygame.image.load(f'assets/game_over/exit.png'), (32, 32))
     click_exit_img = pygame.transform.scale(pygame.image.load(f'assets/game_over/click_exit.png'), (40, 40))
     heart_img = pygame.transform.scale(pygame.image.load(f'assets/game_over/heart.png'), (40, 40))
     empty_heart_img = pygame.transform.scale(pygame.image.load(f'assets/game_over/empty_heart.png'), (40, 40))
