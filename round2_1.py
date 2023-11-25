@@ -33,6 +33,11 @@ def round2():
     # 3. 게임 내 필요한 설정
     clock = pygame.time.Clock() # 시간
 
+    '''
+    이미지 로드, 할당, 객체의 크기 조정 등에 관한 class
+    유령, 플레이어, 총알 각각의 객체에 대해 별도의 코드 작성할 필요x
+    '''
+
     class obj:
         '''
         초기상태 설정
@@ -113,7 +118,7 @@ def round2():
     is_stopped = False  # Start/Stop Boolean
     while not is_stopped:
         clock.tick(60)
-        if startup_counter < 180:
+        if startup_counter < 180: # 3초
             font = pygame.font.Font("assets/pacman_main_menu_images/emulogic.ttf", 50)
             screen.fill('black')
             ready_text = font.render(f'GET READY {3-startup_counter//60}', True, 'yellow')  # antialias : True -> 선 부드럽게..
