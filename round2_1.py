@@ -181,7 +181,7 @@ def round2():
             mm = obj()
             mm.put_image("assets/2round_images/bullet.png")
             mm.change_size(5, 15)
-            mm.x = round(ss.x + ss.sx / 2 - mm.sx / 2) # 총알의 히트박스
+            mm.x = round(ss.x + ss.sx / 2 - mm.sx / 2) # 총알의 위치
             mm.y = ss.y - mm.sy - 10 # player의 주둥이보다 조금 더 앞에서 총알이 나가도록 조정
             mm.move = 20
             bullet_list.append(mm)
