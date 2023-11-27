@@ -1,7 +1,9 @@
-# For-submit
+# 9조-패션왕 김팽맨
 
+## 🖥️ 게임 실행 방법
 mainmenu.py 파일을 실행하면 게임이 시작됩니다.
 
+## 🎮 게임 구성 및 설명
 1라운드는 팩맨, 2라운드는 피버타임(유령 피하기), 3라운드는 상점으로 구성되어 있습니다.
 
 1라운드 설명
@@ -20,27 +22,29 @@ mainmenu.py 파일을 실행하면 게임이 시작됩니다.
 - 총 4개의 상품을 구입할 수 있고, 버튼을 눌러 팩맨의 눈을 하트로 변경할 수 있습니다.
 - 다음 게임부터 구입한 의상으로 게임을 진행할 수 있습니다.
 
-** 
+
+
+### ✔️ 라운드 별 게임 실행 방법
 test.py 파일을 이용하여 각각 라운드별로 실행할 수 있습니다. 
-import pacman_2
+
+test.py 파일 내 import는 주석 처리를 하지 않습니다.
+'import pacman_2
 import round3
-import round2_1 
+import round2_1 '
 
-import는 주석처리를 하지 않습니다.
-
-pacman_2.pacman() # 1라운드
+'pacman_2.pacman() # 1라운드
 round2_1.round2() # 2라운드
-round3.round3() # 3라운드
+round3.round3() # 3라운드'
 
 실행을 원하는 라운드의 주석을 해제한 후 게임을 실행하면 해당 라운드만 실행할 수 있습니다.
 
 ex) 1라운드 실행 시
 
-import pacman_2
+'import pacman_2
 import round3
 import round2_1 
 
 pacman_2.pacman() # 1라운드
-// round2_1.round2() # 2라운드
-// round3.round3() # 3라운드
+#round2_1.round2() # 2라운드
+#round3.round3() # 3라운드'
 **
