@@ -97,7 +97,7 @@ def color(img, click_img, x, y, width, height): #color_index : 그 직전 결정
     global maze_color
 
 
-    clicked_colors = []
+    clicked_colors = [] # 미로 색 정하기, 리스트에 추가
     clicked_colors.append(clicked_green)
     clicked_colors.append(clicked_blue)
     clicked_colors.append(clicked_pink)
