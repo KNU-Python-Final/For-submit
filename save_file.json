@@ -1,12 +1,12 @@
 {
-  "score": 0,
-  "image_file": "default",
+  "score": 5000,
+  "image_file": "heart_leaf",
   "inventory": {
     "default": true,
     "king": false,
     "heart_king": false,
     "leaf": false,
-    "heart_leaf": false,
+    "heart_leaf": true,
     "angel": false,
     "heart_angel": false,
     "santa": false,

@@ -114,7 +114,7 @@ def round3():
                     if selected_image == resources.images.characters.santa_str:
                         selected_image = resources.images.characters.heart_santa_str
                     elif selected_image == resources.images.characters.heart_santa_str:
-                        selected_image = resources.images.characters.heart_king_str
+                        selected_image = resources.images.characters.heart_santa_str
 
                 elif restart_button.collidepoint(mouse_pos):
                     run = False
